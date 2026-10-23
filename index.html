@@ -7,15 +7,15 @@
 <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Source+Serif+4:wght@500;600;700&family=Source+Sans+3:wght@300;400;600;700&family=Noto+Serif+SC:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap">
 <style>
   :root{
-    --green:#005a2c;          /* 中大绿 */
-    --green-deep:#004221;     /* 深绿页眉/页脚 */
-    --green-soft:#eef4ee;     /* 浅绿底 */
-    --gold:#b0924a;          /* 克制点缀金 */
+    --green:#005a2c;
+    --green-deep:#004221;
+    --green-soft:#eef4ee;
+    --gold:#b0924a;
     --ink:#232824;
     --muted:#5b6b62;
     --rule:#dce3dc;
     --card:#f5f8f4;
-    --kapok:#be3a31;         /* 木棉红：喜讯/合作 */
+    --kapok:#be3a31;
     --maxw:1140px;
   }
   *{box-sizing:border-box;}
@@ -133,6 +133,49 @@
   .pub-links{font-size:16px;display:flex;gap:14px;flex-wrap:wrap;}
   .pub-links a{font-weight:600;}
 
+  /* ===== Figure-free featured papers (accepted / under review) ===== */
+  .pub-nofig{display:flex;gap:20px;margin-top:22px;align-items:flex-start;
+       padding-bottom:22px;border-bottom:1px dashed var(--rule);}
+  .jbadge{
+    flex:0 0 220px;width:220px;height:120px;border-radius:8px;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    color:#fff;font-family:'Source Serif 4',Georgia,serif;font-weight:700;
+    font-size:17px;line-height:1.45;padding:14px;position:relative;
+  }
+  .jbadge .jstatus{
+    position:absolute;left:8px;bottom:7px;font-size:10.5px;font-weight:700;letter-spacing:.03em;
+    color:#fff;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.22);
+  }
+  .pub-nofig .pub-body{flex:1 1 420px;min-width:0;}
+  .status-chip{
+    display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;
+    padding:1px 8px;border-radius:10px;margin-right:6px;vertical-align:1px;
+  }
+  .chip-accepted{background:#e7f1ea;color:#0a6b37;border:1px solid #b9d6c6;}
+  .chip-review{background:#f3eef7;color:#6b3fa0;border:1px solid #d8c9e6;}
+
+  /* ===== Education timeline ===== */
+  .edu-list{list-style:none;padding:0;margin:6px 0 0;}
+  .edu-list li{display:flex;gap:18px;padding:11px 0;border-bottom:1px solid var(--rule);flex-wrap:wrap;}
+  .edu-list li:last-child{border-bottom:none;}
+  .edu-year{flex:0 0 168px;font-weight:700;color:var(--green);font-family:'Source Serif 4',Georgia,serif;font-size:15.5px;}
+  .edu-body{flex:1 1 320px;min-width:0;}
+  .edu-body .edu-place{font-weight:600;color:#16201a;}
+  .edu-body .edu-note{font-size:15.5px;color:var(--muted);}
+
+  /* ===== Patents & Honors compact lists ===== */
+  .compact-list{list-style:none;padding:0;margin:6px 0 0;}
+  .compact-list li{
+    padding:9px 0 9px 26px;position:relative;border-bottom:1px solid var(--rule);
+    font-size:15.5px;line-height:1.6;
+  }
+  .compact-list li:last-child{border-bottom:none;}
+  .compact-list li::before{
+    content:'';position:absolute;left:2px;top:18px;width:7px;height:7px;
+    border-radius:50%;background:var(--green);
+  }
+  .compact-list li .pat-num{font-family:var(--en,monospace);color:var(--muted);}
+
   /* ===== Footer ===== */
   .site-footer{
     margin-top:56px;background:var(--green-deep);color:#cfe0d4;
@@ -155,6 +198,10 @@
     .role-line,.email-line{text-align:center;display:block;}
     .pub{flex-wrap:wrap;gap:12px;}
     .pub-fig{flex-basis:100%;width:100%;height:150px;}
+    .pub-nofig{flex-wrap:wrap;gap:12px;}
+    .jbadge{flex-basis:100%;width:100%;min-height:96px;height:auto;}
+    .edu-list li{gap:8px;}
+    .edu-year{flex-basis:100%;}
     .footer-inner{padding:18px;}
   }
 </style>
@@ -189,7 +236,7 @@
     </div>
     <div class="hero-main">
       <h1>Shilin Bo<span class="zh-name">柏仕林</span></h1>
-      <p class="role-line">Ph.D. Candidate in Physical Chemistry · Guangqin Li Group · MOE Lab of Bioinorganic &amp; Synthetic Chemistry</p>
+      <p class="role-line">Ph.D. Candidate in Physical Chemistry · Guangqin Li Group, SYSU · President of Graduate Union &amp; Deputy Secretary, Youth League Committee</p>
       <p class="email-line">Email: <a href="mailto:boslin@mail2.sysu.edu.cn">boslin@mail2.sysu.edu.cn</a></p>
       <p>My research interest lies in <strong>electrocatalytic upcycling of nitrogen oxides (NOx)</strong> and <strong>computational catalysis</strong>. In particular, I design Cu, Co–Zn and Cu–Sn electrocatalysts that reduce NO / nitrate to hydroxylamine (NH<sub>2</sub>OH) en route to value-added N-containing molecules — oximes, amino acids and isoxazoles — and unravel the reaction mechanisms with density-functional-theory (DFT) first-principles calculations.</p>
     </div>
@@ -197,7 +244,7 @@
 
   <!-- ===== Bio ===== -->
   <div class="bio">
-    <p>I am currently a Ph.D. student in Physical Chemistry at the <a href="https://ce.sysu.edu.cn/" target="_blank" rel="noopener">School of Chemistry, Sun Yat-sen University</a>, working in <a href="https://ce.sysu.edu.cn/" target="_blank" rel="noopener">Prof. Guangqin Li's group</a> at the MOE Laboratory of Bioinorganic and Synthetic Chemistry / Lehn Institute of Functional Materials, where I combine electrosynthesis experiments with DFT modelling. Before joining SYSU, I collaborated with the Center of Advanced Electrochemical Energy at <a href="https://chem.cqu.edu.cn/" target="_blank" rel="noopener">Chongqing University</a> (with Prof. Xun Huang and Prof. Zidong Wei) on cation behaviour at the electrified metal/water interface, and worked on heterogeneous Rh-catalysed olefin hydroformylation and DFT at <a href="https://www.njtech.edu.cn/" target="_blank" rel="noopener">Nanjing Tech University</a> (with Prof. Guofeng Guan and Prof. Wei Du). I received my B.Eng. from the School of Chemistry and Chemical Engineering, <a href="https://www.gzhu.edu.cn/" target="_blank" rel="noopener">Guangzhou University</a>.</p>
+    <p>I am currently a Ph.D. student in Physical Chemistry at the <a href="https://ce.sysu.edu.cn/" target="_blank" rel="noopener">School of Chemistry, Sun Yat-sen University</a>, working in <a href="https://ce.sysu.edu.cn/" target="_blank" rel="noopener">Prof. Guangqin Li's group</a> at the MOE Laboratory of Bioinorganic and Synthetic Chemistry / Lehn Institute of Functional Materials, where I combine electrosynthesis experiments with DFT modelling. I received my M.Sc. from the Center of Advanced Electrochemical Energy at <a href="https://chem.cqu.edu.cn/" target="_blank" rel="noopener">Chongqing University</a> (with Prof. Xun Huang and Prof. Zidong Wei), studying cation behaviour at the electrified metal/water interface, and my B.Eng. from the School of Chemistry and Chemical Engineering, <a href="https://www.gzhu.edu.cn/" target="_blank" rel="noopener">Guangzhou University</a> (Innovation Elite Talent Program). I also collaborated on heterogeneous Rh-catalysed olefin hydroformylation and DFT with <a href="https://www.njtech.edu.cn/" target="_blank" rel="noopener">Nanjing Tech University</a> (Prof. Guofeng Guan, Prof. Wei Du). As first / co-first author, I have published high-level papers in Nature Catalysis, Journal of the American Chemical Society, Angewandte Chemie International Edition, Advanced Science and Chemical Science, and hold six Chinese invention patents.</p>
     <p class="collab">I am open to collaboration on electrocatalytic NOx valorisation and DFT-based mechanistic studies — please feel free to ping me if you are interested.</p>
   </div>
 
@@ -210,10 +257,21 @@
     <a href="https://github.com/bigbrosci/qrob" target="_blank" rel="noopener">GitHub</a>
   </nav>
 
+  <!-- ===== Education ===== -->
+  <section class="block">
+    <h2>Education<span class="en-sub">教育背景</span></h2>
+    <ul class="edu-list">
+      <li><span class="edu-year">Ph.D. Candidate</span><div class="edu-body"><div class="edu-place">Physical Chemistry, Sun Yat-sen University (current)</div><div class="edu-note">Advisor: Prof. Guangqin Li · MOE Lab of Bioinorganic &amp; Synthetic Chemistry / Lehn Institute of Functional Materials</div></div></li>
+      <li><span class="edu-year">M.Sc.</span><div class="edu-body"><div class="edu-place">Chongqing University</div><div class="edu-note">Center of Advanced Electrochemical Energy · Prof. Xun Huang, Prof. Zidong Wei</div></div></li>
+      <li><span class="edu-year">B.Eng.</span><div class="edu-body"><div class="edu-place">Guangzhou University</div><div class="edu-note">School of Chemistry and Chemical Engineering · Innovation Elite Talent Program</div></div></li>
+    </ul>
+  </section>
+
   <!-- ===== News ===== -->
   <section class="block">
     <h2>News &amp; Updates<span class="en-sub">学术动态</span></h2>
     <ul class="news">
+      <li class="hot"><span class="date">2026</span><span class="news-text"><span class="tag-new">FIRST AUTHOR · ACCEPTED</span>My first-author paper on a potential-corrected high-throughput screening descriptor for selective NO electroreduction to ammonia is accepted by <strong>Nature Catalysis</strong>.</span></li>
       <li><span class="date">2026/09</span><span class="news-text">One paper accepted to <strong>Chemical Engineering Journal</strong> on Cu-triggered dynamic reconstruction of a Ruddlesden–Popper/perovskite dual-phase cathode for efficient CO<sub>2</sub> electrolysis.</span></li>
       <li><span class="date">2026/08</span><span class="news-text">One paper accepted to <strong>JACS</strong> on thiourea-mediated Cu surfaces for high-current-density synthesis of phenylhydroxylamine.</span></li>
       <li><span class="date">2026/07</span><span class="news-text">One paper accepted to <strong>Advanced Science</strong> on robust, scalable organic persistent luminescence.</span></li>
@@ -228,6 +286,26 @@
   <!-- ===== Publications ===== -->
   <section class="block">
     <h2>Selected Publications<span class="en-sub">代表性论文</span></h2>
+
+    <!-- 0 Nature Catalysis 2026 accepted (first author) -->
+    <article class="pub-nofig">
+      <div class="jbadge" style="background:linear-gradient(135deg,#14663c,#0a4d28);">Nature Catalysis<span class="jstatus">Accepted · 2026</span></div>
+      <div class="pub-body">
+        <p class="pub-title">Potential-Corrected High-Throughput Screening Reveals a Bonding Descriptor for Selective Nitric Oxide Electroreduction to Ammonia</p>
+        <p class="pub-authors"><strong>S. Bo</strong>, J. Li, W. Shi, et al. <span class="status-chip chip-accepted">FIRST AUTHOR · ACCEPTED</span></p>
+        <p class="pub-venue">Nature Catalysis, 2026 (accepted)</p>
+      </div>
+    </article>
+
+    <!-- 0 JACS 2026 under review (first author) -->
+    <article class="pub-nofig">
+      <div class="jbadge" style="background:linear-gradient(135deg,#1d4289,#16336b);">JACS<span class="jstatus">Under Review</span></div>
+      <div class="pub-body">
+        <p class="pub-title">Alkali Metal Radius-Dependent Interfacial Hydration Competition and Bidirectional Hydrogen Evolution Tuning</p>
+        <p class="pub-authors"><strong>S. Bo</strong>, W. Yang, Q. Xiang, et al. <span class="status-chip chip-review">FIRST AUTHOR · UNDER REVIEW</span></p>
+        <p class="pub-venue">Journal of the American Chemical Society, 2026 (under peer review)</p>
+      </div>
+    </article>
 
     <!-- 1 JACS 2026 -->
     <article class="pub">
@@ -366,6 +444,32 @@
     </article>
 
   </section>
+
+  <!-- ===== Patents ===== -->
+  <section class="block">
+    <h2>Patents<span class="en-sub">申请专利（6 件中国发明专利）</span></h2>
+    <ul class="compact-list">
+      <li>Y. Xu, Z. Wei, C. Li, <strong>S. Bo</strong>, et al. A hydrogel and its preparation method and application（一种水凝胶及其制备方法和应用）. Chinese invention patent application, No. 202210687852, filed 2022-08-26.</li>
+      <li>Y. Xu, Z. Wei, C. Li, <strong>S. Bo</strong>, et al. A battery catalyst and its preparation method and application（一种电池催化剂及其制备方法和应用）. Chinese invention patent application, No. 202210687796, filed 2022-08-19.</li>
+      <li>W. Cai, <strong>S. Bo</strong>, D. Zheng, et al. Hydrothermal preparation of a highly adsorptive carbon-fiber ternary layered-double-hydroxide composite film（一种水热制备高吸附性碳纤维三元水滑石复合薄膜的方法）. Chinese invention patent application, No. 202210675421, filed 2022-10-04.</li>
+      <li><strong>S. Bo</strong>, D. Zheng, X. Li, et al. An organosilicone coating and its preparation method and application（一种有机硅涂料及其制备方法和应用）. Chinese invention patent application, No. 202110648621, filed 2021-08-31.</li>
+      <li>W. Cai, W. Yang, C. Dang, <strong>S. Bo</strong>, J. Zhou. One-step solvothermal preparation of a carbon-fiber@MAl-LDH composite film and its application（一种碳纤维@MAl水滑石复合薄膜的一步溶剂热法制备及其应用）. Published CN112316903A, China, 2021-02-05.</li>
+      <li><strong>S. Bo</strong>, W. Zhou, Y. Lu, D. Zheng. An organosilicone coating and its preparation method and application（一种有机硅涂料及其制备方法和应用）. Published CN115260860A, China, 2022-11-01.</li>
+    </ul>
+  </section>
+
+  <!-- ===== Honors & Awards ===== -->
+  <section class="block">
+    <h2>Honors &amp; Awards<span class="en-sub">荣誉奖项</span></h2>
+    <ul class="compact-list">
+      <li>National Final Gold Award (project leader), National College Student Innovation Competition（全国大学生创新大赛决赛金奖 · 负责人）.</li>
+      <li>Provincial Bronze Award, Challenge Cup Competition（“挑战杯”省级铜奖）.</li>
+      <li>National Scholarship; First-class Scholarship; A-level Scholarship; Outstanding Student; Outstanding Graduate.</li>
+      <li>National-level Project Leader, College Student Innovation Training Program（大创国家级项目负责人）.</li>
+      <li>Top 48, LinkedIn Cup Global Entrepreneurship Competition（“领英杯”全球创业大赛 48 强）.</li>
+      <li>Over 60 awards at national, provincial and university levels during undergraduate and graduate studies.</li>
+    </ul>
+  </section>
 </div>
 
 <!-- ===== Footer ===== -->
@@ -377,7 +481,7 @@
     </div>
     <div style="text-align:right;">
       <div>Shilin Bo (柏仕林)</div>
-      <div>Last updated: Sep 2026</div>
+      <div>Last updated: Oct 2026</div>
     </div>
   </div>
 </footer>
