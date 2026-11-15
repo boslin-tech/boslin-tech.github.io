@@ -3,64 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DOI &amp; Publications — Shilin Bo</title>
+<title>Manuscript — Shilin Bo</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:Georgia,'Times New Roman',serif; background:#f4f3ee; color:#1A1B1C; }
-  .top { background:#1d5c3f; color:#fff; padding:14px 20px; font-size:15px; letter-spacing:.3px; }
-  .top a { color:#fff; text-decoration:none; font-weight:600; border-bottom:1px solid rgba(255,255,255,.4); float:right; }
-  .wrap { max-width:820px; margin:0 auto; padding:26px 16px 50px; }
-  .card { background:#fff; border-radius:14px; box-shadow:0 1px 8px rgba(0,0,0,.10); padding:24px 26px; margin-bottom:24px; }
-  .card h2 { font-size:16px; color:#1d5c3f; margin-bottom:12px; font-family:Arial,sans-serif; }
-  .r { display:flex; flex-wrap:wrap; gap:10px; }
-  .r input { flex:1 1 220px; min-width:0; padding:12px 14px; font-size:14px; font-family:Consolas,Menlo,monospace; border:1px solid #d6d5cf; border-radius:10px; min-height:44px; }
-  .r button { padding:12px 20px; background:#1d5c3f; color:#fff; border:none; border-radius:10px; font-size:14px; font-weight:600; cursor:pointer; min-height:44px; font-family:Arial,sans-serif; }
-  .hint { font-size:12.5px; color:#888; margin-top:10px; line-height:1.6; font-family:Arial,sans-serif; }
-  .hint code { background:#f0efe9; padding:1px 6px; border-radius:5px; font-size:12px; }
-  ul { list-style:none; }
-  li { padding:13px 0; border-bottom:1px solid #eceae4; }
-  li:last-child { border-bottom:none; }
-  .t { font-size:15px; line-height:1.5; margin-bottom:4px; }
-  .v { font-size:12.5px; color:#777; font-family:Arial,sans-serif; margin-bottom:6px; }
-  .v a { color:#1d5c3f; text-decoration:none; font-weight:600; font-family:Consolas,Menlo,monospace; background:rgba(29,92,63,.08); padding:2px 8px; border-radius:6px; }
-  .no { font-size:12px; color:#a06a00; font-family:Arial,sans-serif; }
-  .no2 { font-size:12px; color:#2c6e49; font-family:Arial,sans-serif; }
+  body { font-family:'Source Sans 3','Segoe UI',Arial,sans-serif; background:#f4f3ee; color:#1A1B1C; }
+  .bar { position:sticky; top:0; z-index:10; background:#1d5c3f; color:#fff; display:flex; align-items:center; gap:14px; padding:12px 18px; flex-wrap:wrap; }
+  .bar .t { font-size:15px; font-weight:600; letter-spacing:.2px; }
+  .bar .sp { flex:1; }
+  .bar a.dl { color:#fff; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.35); border-radius:8px; padding:7px 14px; font-size:13px; text-decoration:none; white-space:nowrap; }
+  .bar a.dl:hover { background:rgba(255,255,255,.24); }
+  .ctrl { display:flex; align-items:center; gap:10px; margin:14px auto 8px; justify-content:center; flex-wrap:wrap; }
+  .ctrl button { min-width:44px; min-height:44px; font-size:15px; border:1px solid #d6d5cf; background:#fff; color:#1d5c3f; border-radius:10px; cursor:pointer; }
+  .ctrl button:disabled { opacity:.4; cursor:default; }
+  .ctrl .pg { font-size:14px; color:#555; min-width:90px; text-align:center; }
+  .wrap { display:flex; justify-content:center; padding:8px 10px 40px; }
+  #cv { background:#fff; box-shadow:0 1px 6px rgba(0,0,0,.12); max-width:100%; height:auto; }
+  #msg { text-align:center; padding:60px 20px; font-size:15px; color:#666; line-height:1.7; }
+  #msg a { color:#1d5c3f; font-weight:600; }
 </style>
 </head>
 <body>
-<div class="top">DOI &amp; Publications &middot; Shilin Bo <a href="/">Homepage</a></div>
-<div class="wrap">
-  <div class="card">
-    <h2>DOI Resolver</h2>
-    <div class="r">
-      <input id="q" placeholder="Paste a DOI, e.g. 10.1002/anie.7419264">
-      <button onclick="go()">Resolve</button>
-    </div>
-    <p class="hint">Tip: append any DOI to this page's URL — <code>/doi.org/10.xxxx/yyyy</code> — and it resolves automatically.</p>
-  </div>
-  <div class="card">
-    <h2>Publications</h2>
-    <ul>
-      <li><p class="t">Potential-Corrected High-Throughput Screening Reveals a Bonding Descriptor for Selective Nitric Oxide Electroreduction to Ammonia</p><p class="v">Nature Catalysis, 2026 &middot; first author &middot; <span class="no2">accepted — DOI to appear</span></p></li>
-      <li><p class="t">Alkali Metal Radius-Dependent Interfacial Hydration Competition and Bidirectional Hydrogen Evolution Tuning</p><p class="v">Journal of the American Chemical Society, 2026 &middot; first author &middot; <span class="no">under peer review</span></p></li>
-      <li><p class="t">Thiourea-Mediated Cu Surface Boosting Highly Efficient Synthesis of Phenylhydroxylamine under High Current Density</p><p class="v">Journal of the American Chemical Society, 2026 &middot; <a href="https://doi.org/10.1021/jacs.6c08506" target="_blank" rel="noopener">10.1021/jacs.6c08506</a></p></li>
-      <li><p class="t">Bypassing Pre-Photoactivation in High-Barrier Polyamide for Robust and Scalable Organic Persistent Luminescence</p><p class="v">Advanced Science, 2026 &middot; <a href="https://doi.org/10.1002/advs.76151" target="_blank" rel="noopener">10.1002/advs.76151</a></p></li>
-      <li><p class="t">Cu&ndash;Sn Biphasic Alloy Heterostructure With p&ndash;d Orbital Hybridization for Efficient Electrosynthesis of Amino Acids</p><p class="v">Angew. Chem. Int. Ed., 2026 &middot; <a href="https://doi.org/10.1002/anie.7419264" target="_blank" rel="noopener">10.1002/anie.7419264</a></p></li>
-      <li><p class="t">Selective Conversion of NOx Into Isoxazoles via a Co&ndash;Zn Electrocatalyst Steering the Reaction Pathway</p><p class="v">Angew. Chem. Int. Ed., 2026 &middot; <a href="https://doi.org/10.1002/anie.8486876" target="_blank" rel="noopener">10.1002/anie.8486876</a></p></li>
-      <li><p class="t">Copper-Triggered Dynamic Reconstruction Into Ruddlesden&ndash;Popper/Perovskite Dual-Phase Perovskite as a Functional Catalyst Coating Cathode Enables Efficient CO<sub>2</sub> Electrolysis</p><p class="v">Chemical Engineering Journal, 2026, 548, 181789 &middot; <a href="https://doi.org/10.1016/j.cej.2026.181789" target="_blank" rel="noopener">10.1016/j.cej.2026.181789</a></p></li>
-      <li><p class="t">Pair-Site Rh&ndash;WOx/SiO<sub>2</sub> Catalyst for Hydroformylation of Isobutene: An Interface Electronic Regulation Strategy to Enhance Catalytic Efficiency</p><p class="v">Molecular Catalysis, 2025 &middot; <a href="https://doi.org/10.1016/j.mcat.2025.115333" target="_blank" rel="noopener">10.1016/j.mcat.2025.115333</a></p></li>
-      <li><p class="t">Sulfur Quantum Dots Integration in Conductive Microrod Array Enable Superior Oxygen Evolution Performance</p><p class="v">Journal of Colloid and Interface Science, 2025 &middot; <a href="https://doi.org/10.1016/j.jcis.2025.137714" target="_blank" rel="noopener">10.1016/j.jcis.2025.137714</a></p></li>
-      <li><p class="t">Promotion or Suppression of Hydrogen Evolution Activity? The Competition Between Sodium Cations and Quaternary Ammonium Ions at the Metal/Water Interface</p><p class="v">Chemical Science, 2025, 16, 8922&ndash;8933 &middot; first author &middot; <a href="https://doi.org/10.1039/D5SC01034A" target="_blank" rel="noopener">10.1039/D5SC01034A</a></p></li>
-      <li><p class="t">Mussel-Inspired MgAl-LDH/Carbon Fiber Film Modified by Polydopamine for Highly Efficient Removal of Pb<sup>2+</sup></p><p class="v">Journal of Environmental Chemical Engineering, 2021 &middot; <a href="https://doi.org/10.1016/j.jece.2021.106634" target="_blank" rel="noopener">10.1016/j.jece.2021.106634</a></p></li>
-    </ul>
-  </div>
+<div class="bar">
+  <span class="t">Manuscript (v26) — Shilin Bo, School of Chemistry, Sun Yat-sen University</span>
+  <span class="sp"></span>
+  <a class="dl" href="/manuscript_v26.pdf" download>Download PDF</a>
 </div>
+<div class="ctrl">
+  <button id="prev" title="Previous page">&#8592; Prev</button>
+  <span class="pg" id="pg">Loading…</span>
+  <button id="next" title="Next page">Next &#8594;</button>
+</div>
+<div class="wrap"><canvas id="cv"></canvas></div>
+<div id="msg" hidden>This document could not be rendered in the built-in viewer.<br>Please <a href="/manuscript_v26.pdf" download>download the PDF</a> and open it locally, or open this page in an external browser.</div>
+<script src="/pdf.min.js"></script>
 <script>
-function go(){
-  var v=document.getElementById('q').value.trim();
-  v=v.replace(/^https?:\/\/(dx\.)?doi\.org\//i,'');
-  if(/^10\./.test(v)){ location.href='https://doi.org/'+v; }
-}
+(function(){
+  try{
+    if (typeof pdfjsLib === 'undefined') { document.getElementById('msg').hidden=false; return; }
+    pdfjsLib.GlobalWorkerOptions.workerSrc='/pdf.worker.min.js';
+    var url='/manuscript_v26.pdf';
+    var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
+    var prevB=document.getElementById('prev'), nextB=document.getElementById('next'), pg=document.getElementById('pg');
+    var doc=null, page=1, total=0;
+    function render(){
+      doc.getPage(page).then(function(p){
+        var w=Math.min(920, Math.max(320, window.innerWidth-36));
+        var vp=p.getViewport({scale:1});
+        var scale=w/vp.width;
+        var v2=p.getViewport({scale:scale});
+        cv.width=v2.width; cv.height=v2.height;
+        p.render({canvasContext:ctx, viewport:v2});
+        pg.textContent='Page '+page+' / '+total;
+        prevB.disabled=(page<=1); nextB.disabled=(page>=total);
+      });
+    }
+    pdfjsLib.getDocument(url).promise.then(function(d){
+      doc=d; total=d.numPages; render();
+    }).catch(function(){ document.getElementById('msg').hidden=false; });
+    prevB.addEventListener('click',function(){ if(page>1){page--;render();} });
+    nextB.addEventListener('click',function(){ if(page<total){page++;render();} });
+  }catch(e){ document.getElementById('msg').hidden=false; }
+})();
 </script>
 </body>
 </html>
