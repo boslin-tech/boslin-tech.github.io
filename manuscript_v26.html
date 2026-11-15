@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manuscript v26 — Shilin Bo</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Source Sans 3','Segoe UI',Arial,sans-serif; background:#f4f3ee; color:#1A1B1C; }
+  .bar { position:sticky; top:0; z-index:10; background:#1d5c3f; color:#fff; display:flex; align-items:center; gap:14px; padding:12px 18px; flex-wrap:wrap; }
+  .bar .t { font-size:15px; font-weight:600; letter-spacing:.2px; }
+  .bar .sp { flex:1; }
+  .bar a.dl { color:#fff; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.35); border-radius:8px; padding:7px 14px; font-size:13px; text-decoration:none; white-space:nowrap; }
+  .bar a.dl:hover { background:rgba(255,255,255,.24); }
+  .ctrl { display:flex; align-items:center; gap:10px; margin:14px auto 8px; justify-content:center; flex-wrap:wrap; }
+  .ctrl button { min-width:44px; min-height:44px; font-size:15px; border:1px solid #d6d5cf; background:#fff; color:#1d5c3f; border-radius:10px; cursor:pointer; }
+  .ctrl button:disabled { opacity:.4; cursor:default; }
+  .ctrl .pg { font-size:14px; color:#555; min-width:90px; text-align:center; }
+  .wrap { display:flex; justify-content:center; padding:8px 10px 40px; }
+  #cv { background:#fff; box-shadow:0 1px 6px rgba(0,0,0,.12); max-width:100%; height:auto; }
+  #msg { text-align:center; padding:60px 20px; font-size:15px; color:#666; line-height:1.7; }
+  #msg a { color:#1d5c3f; font-weight:600; }
+</style>
+</head>
+<body>
+<div class="bar">
+  <span class="t">Manuscript (v26) — Shilin Bo, School of Chemistry, Sun Yat-sen University</span>
+  <span class="sp"></span>
+  <a class="dl" href="manuscript_v26.pdf" download>Download PDF</a>
+</div>
+<div class="ctrl">
+  <button id="prev" title="Previous page">&#8592; Prev</button>
+  <span class="pg" id="pg">Loading…</span>
+  <button id="next" title="Next page">Next &#8594;</button>
+</div>
+<div class="wrap"><canvas id="cv"></canvas></div>
+<div id="msg" hidden>This document could not be rendered in the built-in viewer.<br>Please <a href="manuscript_v26.pdf" download>download the PDF</a> and open it locally, or open this page in an external browser.</div>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script>
+(function(){
+  try{
+    if (typeof pdfjsLib === 'undefined') { document.getElementById('msg').hidden=false; return; }
+    pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+    var url='manuscript_v26.pdf';
+    var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
+    var prevB=document.getElementById('prev'), nextB=document.getElementById('next'), pg=document.getElementById('pg');
+    var doc=null, page=1, total=0;
+    function render(){
+      doc.getPage(page).then(function(p){
+        var w=Math.min(920, Math.max(320, window.innerWidth-36));
+        var vp=p.getViewport({scale:1});
+        var scale=w/vp.width;
+        var v2=p.getViewport({scale:scale});
+        cv.width=v2.width; cv.height=v2.height;
+        p.render({canvasContext:ctx, viewport:v2});
+        pg.textContent='Page '+page+' / '+total;
+        prevB.disabled=(page<=1); nextB.disabled=(page>=total);
+      });
+    }
+    pdfjsLib.getDocument(url).promise.then(function(d){
+      doc=d; total=d.numPages; render();
+    }).catch(function(){ document.getElementById('msg').hidden=false; });
+    prevB.addEventListener('click',function(){ if(page>1){page--;render();} });
+    nextB.addEventListener('click',function(){ if(page<total){page++;render();} });
+  }catch(e){ document.getElementById('msg').hidden=false; }
+})();
+</script>
+</body>
+</html>
