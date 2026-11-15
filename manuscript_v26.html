@@ -35,12 +35,12 @@
 </div>
 <div class="wrap"><canvas id="cv"></canvas></div>
 <div id="msg" hidden>This document could not be rendered in the built-in viewer.<br>Please <a href="manuscript_v26.pdf" download>download the PDF</a> and open it locally, or open this page in an external browser.</div>
-<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script src="pdf.min.js"></script>
 <script>
 (function(){
   try{
     if (typeof pdfjsLib === 'undefined') { document.getElementById('msg').hidden=false; return; }
-    pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+    pdfjsLib.GlobalWorkerOptions.workerSrc='pdf.worker.min.js';
     var url='manuscript_v26.pdf';
     var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
     var prevB=document.getElementById('prev'), nextB=document.getElementById('next'), pg=document.getElementById('pg');
