@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redirecting… — Shilin Bo</title>
+<style>
+  body { font-family:'Source Sans 3','Segoe UI',Arial,sans-serif; background:#f4f3ee; color:#1A1B1C;
+         display:flex; align-items:center; justify-content:center; min-height:60vh; margin:0; text-align:center; }
+  .card { max-width:520px; padding:32px 28px; background:#fff; border-radius:14px;
+          box-shadow:0 1px 6px rgba(0,0,0,.10); }
+  .card h1 { font-size:17px; color:#1d5c3f; margin:0 0 10px; font-weight:600; }
+  .card p { font-size:14px; color:#555; line-height:1.7; margin:6px 0; }
+  .card a { color:#1d5c3f; font-weight:600; text-decoration:none; border-bottom:1px solid rgba(29,92,63,.35); }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Redirecting…</h1>
+  <p id="info">Taking you to the destination page.</p>
+  <p>If nothing happens, <a id="lnk" href="/">go to the homepage</a>.</p>
+</div>
+<script>
+(function(){
+  try{
+    var p = location.pathname.replace(/^\/+|\/+$/g,'');
+    /* /doi.org/<doi>  ->  https://doi.org/<doi> */
+    var m = p.match(/^doi\.org\/(.+)$/i);
+    if (m) { location.replace('https://doi.org/' + m[1]); return; }
+    /* /doi/<doi>  ->  https://doi.org/<doi> */
+    m = p.match(/^doi\/(.+)$/i);
+    if (m) { location.replace('https://doi.org/' + m[1]); return; }
+    /* /10.xxxx/yyyy  ->  https://doi.org/10.xxxx/yyyy */
+    if (/^10\./.test(p)) { location.replace('https://doi.org/' + p); return; }
+    /* anything else -> homepage */
+    document.getElementById('info').textContent = 'Page not found. Redirecting to the homepage…';
+    document.getElementById('lnk').href = '/';
+    setTimeout(function(){ location.replace('/'); }, 1500);
+  }catch(e){ location.replace('/'); }
+})();
+</script>
+</body>
+</html>
