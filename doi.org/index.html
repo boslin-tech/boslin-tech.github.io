@@ -12,14 +12,15 @@
   .bar .sp { flex:1; }
   .bar a.dl { color:#fff; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.35); border-radius:8px; padding:7px 14px; font-size:13px; text-decoration:none; white-space:nowrap; }
   .bar a.dl:hover { background:rgba(255,255,255,.24); }
-  .ctrl { display:flex; align-items:center; gap:10px; margin:14px auto 8px; justify-content:center; flex-wrap:wrap; }
-  .ctrl button { min-width:44px; min-height:44px; font-size:15px; border:1px solid #d6d5cf; background:#fff; color:#1d5c3f; border-radius:10px; cursor:pointer; }
-  .ctrl button:disabled { opacity:.4; cursor:default; }
-  .ctrl .pg { font-size:14px; color:#555; min-width:90px; text-align:center; }
-  .wrap { display:flex; justify-content:center; padding:8px 10px 40px; }
-  #cv { background:#fff; box-shadow:0 1px 6px rgba(0,0,0,.12); max-width:100%; height:auto; }
+  #prog { position:sticky; top:0; margin:10px auto 0; width:fit-content; max-width:90%; background:rgba(29,92,63,.10); color:#1d5c3f; font-size:12.5px; padding:5px 14px; border-radius:16px; display:none; }
+  #pages { padding:14px 10px 60px; }
+  .pg { margin:0 auto 26px; max-width:100%; width:fit-content; position:relative; }
+  .pg canvas { display:block; max-width:100%; height:auto; background:#fff; box-shadow:0 1px 6px rgba(0,0,0,.12); }
+  .pgn { text-align:center; font-size:11.5px; color:#8a8a84; margin-top:6px; font-variant-numeric:tabular-nums; }
   #msg { text-align:center; padding:60px 20px; font-size:15px; color:#666; line-height:1.7; }
   #msg a { color:#1d5c3f; font-weight:600; }
+  #top { display:block; margin:0 auto 24px; width:fit-content; color:#1d5c3f; background:rgba(29,92,63,.08); border:1px solid rgba(29,92,63,.25); border-radius:10px; padding:8px 16px; font-size:13px; text-decoration:none; }
+  #top:hover { background:rgba(29,92,63,.15); }
 </style>
 </head>
 <body>
@@ -28,40 +29,42 @@
   <span class="sp"></span>
   <a class="dl" href="/manuscript_v26.pdf" download>Download PDF</a>
 </div>
-<div class="ctrl">
-  <button id="prev" title="Previous page">&#8592; Prev</button>
-  <span class="pg" id="pg">Loading…</span>
-  <button id="next" title="Next page">Next &#8594;</button>
-</div>
-<div class="wrap"><canvas id="cv"></canvas></div>
+<a id="top" href="#" hidden>&#8593; Back to top</a>
+<div id="prog"></div>
+<div id="pages"></div>
 <div id="msg" hidden>This document could not be rendered in the built-in viewer.<br>Please <a href="/manuscript_v26.pdf" download>download the PDF</a> and open it locally, or open this page in an external browser.</div>
 <script src="/pdf.min.js"></script>
 <script>
 (function(){
   try{
+    var prog=document.getElementById('prog'), pages=document.getElementById('pages'), toTop=document.getElementById('top');
     if (typeof pdfjsLib === 'undefined') { document.getElementById('msg').hidden=false; return; }
     pdfjsLib.GlobalWorkerOptions.workerSrc='/pdf.worker.min.js';
-    var url='/manuscript_v26.pdf';
-    var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
-    var prevB=document.getElementById('prev'), nextB=document.getElementById('next'), pg=document.getElementById('pg');
-    var doc=null, page=1, total=0;
-    function render(){
-      doc.getPage(page).then(function(p){
-        var w=Math.min(920, Math.max(320, window.innerWidth-36));
-        var vp=p.getViewport({scale:1});
-        var scale=w/vp.width;
-        var v2=p.getViewport({scale:scale});
-        cv.width=v2.width; cv.height=v2.height;
-        p.render({canvasContext:ctx, viewport:v2});
-        pg.textContent='Page '+page+' / '+total;
-        prevB.disabled=(page<=1); nextB.disabled=(page>=total);
-      });
-    }
-    pdfjsLib.getDocument(url).promise.then(function(d){
-      doc=d; total=d.numPages; render();
-    }).catch(function(){ document.getElementById('msg').hidden=false; });
-    prevB.addEventListener('click',function(){ if(page>1){page--;render();} });
-    nextB.addEventListener('click',function(){ if(page<total){page++;render();} });
+    prog.style.display='block'; prog.textContent='Loading PDF…';
+    pdfjsLib.getDocument('/manuscript_v26.pdf').promise.then(function(doc){
+      var total=doc.numPages;
+      prog.textContent='Rendering page 1 / '+total+' …';
+      var w=Math.min(920, Math.max(320, window.innerWidth-36));
+      var dpr=(window.innerWidth<700 && window.devicePixelRatio>1)?Math.min(window.devicePixelRatio,2):1;
+      var i=1;
+      function next(){
+        if(i>total){ prog.style.display='none'; toTop.hidden=false; return; }
+        doc.getPage(i).then(function(p){
+          var vp=p.getViewport({scale:1});
+          var s=(w/vp.width)*dpr;
+          var v2=p.getViewport({scale:s});
+          var holder=document.createElement('div'); holder.className='pg';
+          var cv=document.createElement('canvas');
+          cv.width=v2.width; cv.height=v2.height; cv.style.width=w+'px';
+          var tag=document.createElement('div'); tag.className='pgn'; tag.textContent='Page '+i+' of '+total;
+          holder.appendChild(cv); holder.appendChild(tag); pages.appendChild(holder);
+          return p.render({canvasContext:cv.getContext('2d'), viewport:v2}).promise.then(function(){
+            i++; prog.textContent='Rendering page '+i+' / '+total+' …'; next();
+          });
+        }).catch(function(){ document.getElementById('msg').hidden=false; prog.style.display='none'; });
+      }
+      next();
+    }).catch(function(){ document.getElementById('msg').hidden=false; prog.style.display='none'; });
   }catch(e){ document.getElementById('msg').hidden=false; }
 })();
 </script>
